@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --font-hoved: "Avenir Next", "Satoshi", "Nunito Sans", "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --farge-bakgrunn: #f8fafc;
+  --farge-bakgrunn-mork: #0f172a;
+  --farge-tekst: #0f172a;
+  --farge-tekst-lys: #e2e8f0;
+  --farge-kort: #ffffff;
+  --farge-kant: #e2e8f0;
+  --farge-primar: #0f172a;
+  --farge-primar-hover: #1e293b;
+  --farge-accent: #0f6288;
+  --farge-dempet: #64748b;
+  --tekst-hero: clamp(2.25rem, 5vw, 3.5rem);
+  --tekst-seksjon: clamp(1.75rem, 3vw, 2.125rem);
+  --space-seksjon-mobil: clamp(3rem, 8vw, 4.5rem);
+  --space-seksjon-desktop: clamp(5rem, 8vw, 7.5rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-hoved);
+  background:
+    radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 32%),
+    radial-gradient(circle at 100% 0%, #f3f7ff 0%, transparent 35%),
+    var(--farge-bakgrunn);
+  color: var(--farge-tekst);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+::selection {
+  background: #cbd5e1;
+  color: #0f172a;
+}
+
+.seksjon-wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 76rem;
+  padding-inline: 1rem;
+}
+
+.seksjon-pad {
+  padding-block: var(--space-seksjon-mobil);
+}
+
+@media (min-width: 1024px) {
+  .seksjon-pad {
+    padding-block: var(--space-seksjon-desktop);
+  }
+}
+
+.overflate-kort {
+  border: 1px solid rgb(226 232 240);
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 10px 24px rgb(15 23 42 / 6%);
+}

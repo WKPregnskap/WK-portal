@@ -1,0 +1,242 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Rolle {
+  ADMIN
+  REGNSKAPSFORER
+  KUNDE
+}
+
+enum OppgaveStatus {
+  APEN
+  OPPLASTET
+  LINKET
+  FERDIG
+}
+
+enum TilkoblingsType {
+  TRIPLETEX
+  DUMMY
+}
+
+enum TilkoblingsStatus {
+  IKKE_TILKOBLET
+  TILKOBLET
+  FEIL
+  DEAKTIVERT
+}
+
+enum MvaStatus {
+  IKKE_STARTET
+  PAGAR
+  INNRAPPORTERT
+}
+
+model Organisasjon {
+  id                 String             @id @default(cuid())
+  navn               String
+  opprettetTidspunkt DateTime           @default(now())
+  oppdatertTidspunkt DateTime           @updatedAt
+  kundeselskaper     Kundeselskap[]
+  brukere            Bruker[]
+  kunngjoringer      Kunngjoring[]
+  auditLogger        AuditLogg[]
+
+  @@map("Organisasjon")
+}
+
+model Kundeselskap {
+  id                 String              @id @default(cuid())
+  organisasjonId     String
+  navn               String
+  orgnummer          String              @unique
+  aktiv              Boolean             @default(true)
+  opprettetTidspunkt DateTime            @default(now())
+  oppdatertTidspunkt DateTime            @updatedAt
+  organisasjon       Organisasjon        @relation(fields: [organisasjonId], references: [id], onDelete: Cascade)
+  brukere            Bruker[]
+  systemTilkoblinger SystemTilkobling[]
+  bilagsOppgaver     BilagsOppgave[]
+  dokumenter         OpplastetDokument[]
+  meldingsTrader     MeldingsTrad[]
+  mvaPerioder        MvaPeriodeStatus[]
+  dashboardCache     DashboardCache[]
+  auditLogger        AuditLogg[]
+
+  @@index([organisasjonId])
+  @@map("Kundeselskap")
+}
+
+model Bruker {
+  id                 String       @id @default(cuid())
+  organisasjonId     String
+  kundeselskapId     String?
+  navn               String
+  epost              String       @unique
+  passordHash        String
+  rolle              Rolle
+  aktiv              Boolean      @default(true)
+  sistInnlogget      DateTime?
+  opprettetTidspunkt DateTime     @default(now())
+  oppdatertTidspunkt DateTime     @updatedAt
+  organisasjon       Organisasjon @relation(fields: [organisasjonId], references: [id], onDelete: Cascade)
+  kundeselskap       Kundeselskap? @relation(fields: [kundeselskapId], references: [id], onDelete: SetNull)
+  meldinger          Melding[]
+  bilagsOppgaver     BilagsOppgave[] @relation("OpprettetAv")
+  dokumenter         OpplastetDokument[]
+  auditLogger        AuditLogg[]
+
+  @@index([organisasjonId])
+  @@index([kundeselskapId])
+  @@map("Bruker")
+}
+
+model SystemTilkobling {
+  id                         String           @id @default(cuid())
+  kundeselskapId             String
+  type                       TilkoblingsType
+  status                     TilkoblingsStatus @default(IKKE_TILKOBLET)
+  consumerTokenKryptert      String?
+  employeeTokenKryptert      String?
+  sessionTokenKryptert       String?
+  sessionTokenExpiresAt      DateTime?
+  sistTestetTidspunkt        DateTime?
+  sistFeilmelding            String?
+  deaktivertTidspunkt        DateTime?
+  opprettetTidspunkt         DateTime         @default(now())
+  oppdatertTidspunkt         DateTime         @updatedAt
+  kundeselskap               Kundeselskap     @relation(fields: [kundeselskapId], references: [id], onDelete: Cascade)
+
+  @@index([kundeselskapId, type])
+  @@map("SystemTilkobling")
+}
+
+model BilagsOppgave {
+  id                 String         @id @default(cuid())
+  kundeselskapId     String
+  opprettetAvId      String
+  tittel             String
+  beskrivelse        String?
+  externalVoucherId  String?
+  status             OppgaveStatus  @default(APEN)
+  forfallsdato       DateTime?
+  opprettetTidspunkt DateTime       @default(now())
+  oppdatertTidspunkt DateTime       @updatedAt
+  kundeselskap       Kundeselskap   @relation(fields: [kundeselskapId], references: [id], onDelete: Cascade)
+  opprettetAv        Bruker         @relation("OpprettetAv", fields: [opprettetAvId], references: [id], onDelete: Restrict)
+  dokumenter         OpplastetDokument[]
+
+  @@index([kundeselskapId, status])
+  @@map("BilagsOppgave")
+}
+
+model OpplastetDokument {
+  id                 String       @id @default(cuid())
+  kundeselskapId     String
+  bilagsOppgaveId    String
+  opplastetAvId      String
+  filnavn            String
+  contentType        String
+  storrelseBytes     Int
+  s3Nokkel           String
+  opprettetTidspunkt DateTime     @default(now())
+  kundeselskap       Kundeselskap @relation(fields: [kundeselskapId], references: [id], onDelete: Cascade)
+  bilagsOppgave      BilagsOppgave @relation(fields: [bilagsOppgaveId], references: [id], onDelete: Cascade)
+  opplastetAv        Bruker        @relation(fields: [opplastetAvId], references: [id], onDelete: Restrict)
+
+  @@index([kundeselskapId, bilagsOppgaveId])
+  @@map("OpplastetDokument")
+}
+
+model MeldingsTrad {
+  id                 String       @id @default(cuid())
+  kundeselskapId     String
+  emne               String
+  arkivert           Boolean      @default(false)
+  opprettetTidspunkt DateTime     @default(now())
+  oppdatertTidspunkt DateTime     @updatedAt
+  kundeselskap       Kundeselskap @relation(fields: [kundeselskapId], references: [id], onDelete: Cascade)
+  meldinger          Melding[]
+
+  @@index([kundeselskapId])
+  @@map("MeldingsTrad")
+}
+
+model Melding {
+  id                 String       @id @default(cuid())
+  meldingsTradId     String
+  avsenderId         String
+  innhold            String
+  intern             Boolean      @default(false)
+  opprettetTidspunkt DateTime     @default(now())
+  meldingsTrad       MeldingsTrad @relation(fields: [meldingsTradId], references: [id], onDelete: Cascade)
+  avsender           Bruker       @relation(fields: [avsenderId], references: [id], onDelete: Restrict)
+
+  @@index([meldingsTradId])
+  @@map("Melding")
+}
+
+model Kunngjoring {
+  id                 String       @id @default(cuid())
+  organisasjonId     String
+  tittel             String
+  melding            String
+  aktivFra           DateTime
+  aktivTil           DateTime?
+  opprettetTidspunkt DateTime     @default(now())
+  organisasjon       Organisasjon @relation(fields: [organisasjonId], references: [id], onDelete: Cascade)
+
+  @@index([organisasjonId, aktivFra])
+  @@map("Kunngjoring")
+}
+
+model MvaPeriodeStatus {
+  id                 String       @id @default(cuid())
+  kundeselskapId     String
+  periode            String
+  status             MvaStatus    @default(IKKE_STARTET)
+  rapportertDato     DateTime?
+  referanse          String?
+  opprettetTidspunkt DateTime     @default(now())
+  oppdatertTidspunkt DateTime     @updatedAt
+  kundeselskap       Kundeselskap @relation(fields: [kundeselskapId], references: [id], onDelete: Cascade)
+
+  @@unique([kundeselskapId, periode])
+  @@map("MvaPeriodeStatus")
+}
+
+model AuditLogg {
+  id                 String       @id @default(cuid())
+  organisasjonId     String
+  kundeselskapId     String?
+  brukerId           String?
+  handling           String
+  ressursType        String
+  ressursId          String?
+  metadataJson       Json?
+  opprettetTidspunkt DateTime     @default(now())
+  organisasjon       Organisasjon @relation(fields: [organisasjonId], references: [id], onDelete: Cascade)
+  kundeselskap       Kundeselskap? @relation(fields: [kundeselskapId], references: [id], onDelete: SetNull)
+  bruker             Bruker?      @relation(fields: [brukerId], references: [id], onDelete: SetNull)
+
+  @@index([organisasjonId, opprettetTidspunkt])
+  @@map("AuditLogg")
+}
+
+model DashboardCache {
+  id                 String       @id @default(cuid())
+  kundeselskapId     String
+  periode            String
+  payloadJson        Json
+  oppdatertTidspunkt DateTime     @updatedAt
+  kundeselskap       Kundeselskap @relation(fields: [kundeselskapId], references: [id], onDelete: Cascade)
+
+  @@unique([kundeselskapId, periode])
+  @@map("DashboardCache")
+}

@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  bygg-og-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hent kode
+        uses: actions/checkout@v4
+
+      - name: Sett opp Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer avhengigheter
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Bygg
+        run: npm run build
+
+      - name: Kjør Vitest
+        run: npm test
