@@ -5,185 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WK Portal - Interaktiv Design Preview</title>
     <style>
-      :root {
-        --bakgrunn: #f7fafc;
-        --flate: #ffffff;
-        --tekst: #0f172a;
-        --dempet: #64748b;
-        --kant: #dbe6f0;
-        --primar: #0f172a;
-        --teal: #0f6288;
-        --cyan: #0ea5b7;
-        --green: #16a34a;
-        --amber: #d97706;
-        --hero: clamp(2rem, 4.4vw, 3.2rem);
-      }
-
+      :root { --bg:#f7fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#dbe6f0; --dark:#0f172a; --teal:#0f6288; --cyan:#0ea5b7; --ok:#16a34a; --warn:#d97706; }
       * { box-sizing: border-box; }
-
-      body {
-        margin: 0;
-        font-family: "Avenir Next", "Satoshi", "Nunito Sans", "Segoe UI", sans-serif;
-        color: var(--tekst);
-        background:
-          radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 30%),
-          radial-gradient(circle at 100% 0%, #f0f8ff 0%, transparent 34%),
-          var(--bakgrunn);
-      }
-
-      .wrap { width: min(1160px, 92vw); margin: 0 auto; }
-
-      .top {
-        padding: 1rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      .logo { font-weight: 700; font-size: 0.92rem; letter-spacing: 0.05em; }
-
-      .knapp {
-        border: 1px solid var(--kant);
-        background: #fff;
-        border-radius: 12px;
-        padding: 10px 14px;
-        font-weight: 600;
-        color: var(--tekst);
-        cursor: pointer;
-        transition: 0.2s ease;
-      }
-
-      .knapp:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgb(15 23 42 / 10%); }
-
-      .knapp-primar { background: var(--primar); color: #fff; border-color: transparent; }
-      .knapp-teal { background: linear-gradient(120deg, var(--teal), #0c4d6f); color: #fff; border-color: transparent; }
-      .knapp-cyan { background: linear-gradient(120deg, var(--cyan), #0d7894); color: #fff; border-color: transparent; }
-
-      .hero {
-        background: linear-gradient(130deg, #0f172a, #0f4060 55%, #0d5e7d);
-        border-radius: 24px;
-        color: #ecfeff;
-        padding: 1.7rem;
-        box-shadow: 0 24px 40px rgb(15 23 42 / 24%);
-      }
-
-      h1 { margin: 0.55rem 0; font-size: var(--hero); line-height: 1.08; max-width: 14ch; }
-      .lead { color: #dbeafe; max-width: 62ch; }
-
-      .hero-flex { display: flex; align-items: end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-
-      .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 1rem; }
-      .chip {
-        border: 1px solid rgb(255 255 255 / 32%);
-        background: rgb(255 255 255 / 8%);
-        color: #f8fafc;
-        border-radius: 999px;
-        padding: 7px 12px;
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-
-      .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 1.2rem 0; }
-      .tabs .knapp.active { background: #e2ecf6; border-color: #bfcede; }
-
-      .layout {
-        margin-top: 1.1rem;
-        display: grid;
-        grid-template-columns: 1.25fr 1fr;
-        gap: 14px;
-      }
-
-      .kort {
-        border: 1px solid var(--kant);
-        border-radius: 16px;
-        background: var(--flate);
-        box-shadow: 0 10px 22px rgb(15 23 42 / 6%);
-        padding: 15px;
-      }
-
-      .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
-
-      .kpi {
-        border-radius: 14px;
-        padding: 14px;
-        color: #fff;
-      }
-
-      .kpi h3 { margin: 0; font-size: 0.84rem; font-weight: 600; opacity: 0.95; }
-      .kpi p { margin: 7px 0 0; font-size: 1.5rem; font-weight: 700; }
-      .kpi small { opacity: 0.88; font-weight: 500; }
-
-      .kpi-omsetning { background: linear-gradient(125deg, #0f6288, #0d7aa0); }
-      .kpi-kost { background: linear-gradient(125deg, #1e293b, #334155); }
-      .kpi-resultat { background: linear-gradient(125deg, #16a34a, #15803d); }
-
-      .seksjon-tittel { margin: 2px 0 8px; font-size: 1.18rem; }
-      .dempet { color: var(--dempet); font-size: 0.9rem; }
-
-      .graf-wrap {
-        border: 1px solid #e5edf5;
-        border-radius: 12px;
-        padding: 10px;
-        background: linear-gradient(180deg, #f8fbff, #ffffff);
-      }
-
-      .bars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; align-items: end; height: 160px; margin-top: 8px; }
-      .bar {
-        background: linear-gradient(180deg, #0ea5b7, #0f6288);
-        border-radius: 8px 8px 4px 4px;
-        position: relative;
-      }
-
-      .bar span { position: absolute; bottom: -22px; width: 100%; text-align: center; font-size: 0.74rem; color: #64748b; }
-
-      .liste { margin: 0; padding-left: 18px; color: #334155; }
-      .liste li { margin: 8px 0; }
-
-      .badge {
-        display: inline-block;
-        border-radius: 999px;
-        padding: 6px 9px;
-        font-size: 0.73rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-      }
-
-      .b-ok { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-      .b-var { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
-      .b-info { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
-
-      .stack { display: grid; gap: 12px; }
-
-      .rad { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #edf2f7; }
-      .rad:last-child { border-bottom: 0; }
-
-      .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-
-      .toast {
-        position: fixed;
-        right: 16px;
-        bottom: 16px;
-        background: #0f172a;
-        color: #fff;
-        border-radius: 12px;
-        padding: 10px 12px;
-        font-size: 0.88rem;
-        opacity: 0;
-        transform: translateY(8px);
-        transition: 0.2s ease;
-        pointer-events: none;
-      }
-
-      .toast.vis { opacity: 1; transform: translateY(0); }
-
-      @media (max-width: 980px) {
-        .layout { grid-template-columns: 1fr; }
-      }
-
-      @media (max-width: 760px) {
-        .kpi-grid { grid-template-columns: 1fr; }
-      }
+      body { margin:0; font-family:"Avenir Next","Satoshi","Nunito Sans","Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 30%),radial-gradient(circle at 100% 0%, #f0f8ff 0%, transparent 34%),var(--bg); }
+      .wrap { width:min(1160px,92vw); margin:0 auto; }
+      .top { padding:1rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+      .logo { font-weight:700; letter-spacing:.05em; font-size:.92rem; }
+      .hero { background:linear-gradient(130deg,#0f172a,#0f4060 55%,#0d5e7d); color:#ecfeff; border-radius:24px; padding:1.6rem; box-shadow:0 24px 40px rgb(15 23 42 / 24%); }
+      .hero h1 { margin:.5rem 0; font-size:clamp(2rem,4.4vw,3.2rem); line-height:1.08; max-width:14ch; }
+      .lead { color:#dbeafe; max-width:62ch; }
+      .hero-flex { display:flex; justify-content:space-between; align-items:end; gap:1rem; flex-wrap:wrap; }
+      .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:1rem; }
+      .chip { border:1px solid rgb(255 255 255 / 32%); background:rgb(255 255 255 / 8%); border-radius:999px; padding:7px 12px; font-size:.8rem; font-weight:600; }
+      .knapp { border:1px solid var(--line); background:#fff; color:var(--text); border-radius:12px; padding:10px 14px; font-weight:600; cursor:pointer; transition:.2s ease; }
+      .knapp:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgb(15 23 42 / 10%); }
+      .knapp-dark { background:var(--dark); color:#fff; border-color:transparent; }
+      .knapp-teal { background:linear-gradient(120deg,var(--teal),#0c4d6f); color:#fff; border-color:transparent; }
+      .tabs { margin:1rem 0; display:flex; flex-wrap:wrap; gap:8px; }
+      .tabs .knapp.active { background:#e2ecf6; border-color:#bfcede; }
+      .view { display:none; }
+      .view.active { display:block; }
+      .layout { display:grid; grid-template-columns:1.25fr 1fr; gap:14px; }
+      .stack { display:grid; gap:12px; }
+      .kort { border:1px solid var(--line); border-radius:16px; background:var(--card); box-shadow:0 10px 22px rgb(15 23 42 / 6%); padding:15px; }
+      .title { margin:2px 0 8px; font-size:1.18rem; }
+      .muted { color:var(--muted); font-size:.9rem; }
+      .kpi-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:14px 0; }
+      .kpi { border-radius:14px; padding:14px; color:#fff; }
+      .kpi h3 { margin:0; font-size:.84rem; }
+      .kpi p { margin:7px 0 0; font-size:1.5rem; font-weight:700; }
+      .kpi small { opacity:.9; }
+      .kpi-a { background:linear-gradient(125deg,#0f6288,#0d7aa0); }
+      .kpi-b { background:linear-gradient(125deg,#1e293b,#334155); }
+      .kpi-c { background:linear-gradient(125deg,#16a34a,#15803d); }
+      .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+      .months { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+      .months .knapp.active { background:#dff2fb; border-color:#9fdaf0; }
+      .graf-wrap { border:1px solid #e5edf5; border-radius:12px; padding:10px; background:linear-gradient(180deg,#f8fbff,#fff); }
+      .bars { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; align-items:end; height:150px; margin-top:8px; }
+      .bar { background:linear-gradient(180deg,#0ea5b7,#0f6288); border-radius:8px 8px 4px 4px; position:relative; }
+      .bar span { position:absolute; bottom:-22px; width:100%; text-align:center; font-size:.74rem; color:#64748b; }
+      .rad { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid #edf2f7; }
+      .rad:last-child { border-bottom:0; }
+      .badge { display:inline-block; border-radius:999px; padding:6px 9px; font-size:.73rem; font-weight:700; }
+      .ok { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; }
+      .warn { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+      .info { background:#e0f2fe; color:#075985; border:1px solid #bae6fd; }
+      .input, .textarea { width:100%; border:1px solid #cbd5e1; border-radius:12px; padding:10px; font:inherit; }
+      .textarea { min-height:110px; resize:vertical; }
+      .liste { margin:0; padding-left:18px; color:#334155; }
+      .liste li { margin:8px 0; }
+      .toast { position:fixed; right:16px; bottom:16px; background:#0f172a; color:#fff; border-radius:12px; padding:10px 12px; font-size:.88rem; opacity:0; transform:translateY(8px); transition:.2s ease; pointer-events:none; }
+      .toast.vis { opacity:1; transform:translateY(0); }
+      @media (max-width:980px){ .layout { grid-template-columns:1fr; } }
+      @media (max-width:760px){ .kpi-grid{ grid-template-columns:1fr; } }
     </style>
   </head>
   <body>
@@ -191,7 +66,7 @@
       <div class="logo">WERNER KLAUSEN REGNSKAP</div>
       <div class="actions">
         <button class="knapp" data-klikk="Bytter til kundevy (demo)">Kundevy</button>
-        <button class="knapp knapp-primar" data-klikk="Åpner meldingssenter (demo)">Meldingssenter</button>
+        <button class="knapp knapp-dark" data-klikk="Åpner meldingssenter (demo)">Meldingssenter</button>
       </div>
     </header>
 
@@ -199,13 +74,13 @@
       <section class="hero">
         <div class="hero-flex">
           <div>
-            <p class="dempet" style="color:#bfdbfe; margin: 0;">WK PORTAL - INTERAKTIV PROTOTYPE</p>
-            <h1>Finere design med farger, trender og testbar interaksjon</h1>
-            <p class="lead">Alt her er klikkbart for demo. Dataene er mock-data for visning av dashboard-opplevelsen.</p>
+            <p class="muted" style="color:#bfdbfe; margin:0;">WK PORTAL - INTERAKTIV PROTOTYPE</p>
+            <h1>Allt är klickbart med reaktion i UI</h1>
+            <p class="lead">Månader byter KPI-värden och varje knapp visar vad som händer.</p>
           </div>
           <div class="actions">
             <button class="knapp knapp-teal" data-klikk="Ny bilagsoppgave opprettet (demo)">Ny oppgave</button>
-            <button class="knapp knapp-cyan" data-klikk="Rapport eksportert (demo)">Eksporter</button>
+            <button class="knapp knapp-dark" data-klikk="Rapport eksportert (demo)">Eksporter</button>
           </div>
         </div>
         <div class="chips">
@@ -216,93 +91,121 @@
         </div>
       </section>
 
-      <div class="tabs" style="margin-top: 14px;">
+      <div class="tabs">
         <button class="knapp active" data-tab="dashboard">Dashboard</button>
         <button class="knapp" data-tab="bilag">Bilag</button>
         <button class="knapp" data-tab="meldinger">Meldinger</button>
         <button class="knapp" data-tab="mva">MVA</button>
       </div>
 
-      <section class="layout">
-        <div class="stack">
+      <section class="view active" id="view-dashboard">
+        <div class="layout">
+          <div class="stack">
+            <article class="kort">
+              <h2 class="title" id="dashboard-title">KPI - Februari 2026</h2>
+              <p class="muted">Sammenlignet med forrige måned</p>
+              <div class="months" id="month-buttons">
+                <button class="knapp active" data-month="2025-09">Sep 2025</button>
+                <button class="knapp" data-month="2025-10">Okt 2025</button>
+                <button class="knapp" data-month="2025-11">Nov 2025</button>
+                <button class="knapp" data-month="2025-12">Des 2025</button>
+                <button class="knapp" data-month="2026-01">Jan 2026</button>
+                <button class="knapp" data-month="2026-02">Feb 2026</button>
+              </div>
+              <div class="kpi-grid">
+                <div class="kpi kpi-a"><h3>Omsetning</h3><p id="kpi-omsetning">248 000 kr</p><small id="kpi-omsetning-endring">+3.1%</small></div>
+                <div class="kpi kpi-b"><h3>Kostnader</h3><p id="kpi-kost">161 000 kr</p><small id="kpi-kost-endring">+1.4%</small></div>
+                <div class="kpi kpi-c"><h3>Resultat</h3><p id="kpi-resultat">87 000 kr</p><small id="kpi-resultat-endring">+6.2%</small></div>
+              </div>
+              <div class="actions">
+                <button class="knapp" id="forrige-knapp">Forrige måned</button>
+                <button class="knapp" id="neste-knapp">Neste måned</button>
+                <button class="knapp" id="simuler-knapp">Simuler nye tall</button>
+              </div>
+            </article>
+
+            <article class="kort">
+              <h2 class="title">Trend siste 6 måneder</h2>
+              <div class="graf-wrap">
+                <svg viewBox="0 0 620 180" width="100%" aria-label="Linjegraf for resultat">
+                  <polyline fill="none" stroke="#93c5fd" stroke-width="2" points="0,130 620,130"></polyline>
+                  <polyline id="trend-line" fill="none" stroke="#0f6288" stroke-width="4" points="20,120 120,105 220,112 320,90 420,74 520,56"></polyline>
+                </svg>
+                <div class="bars" id="trend-bars"></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="stack">
+            <article class="kort">
+              <h2 class="title">Manglende bilag</h2>
+              <div class="rad"><span>Kvittering - drivstoff</span><span class="badge warn">ÅPEN</span></div>
+              <div class="rad"><span>Faktura INV-2026-22</span><span class="badge info">OPPLASTET</span></div>
+              <div class="rad"><span>Reiseregning Q1</span><span class="badge ok">FERDIG</span></div>
+              <div class="actions">
+                <button class="knapp" data-klikk="Opplasting simulert">Last opp bilag</button>
+                <button class="knapp" data-klikk="Bilag markert som linket (demo)">Marker som linket</button>
+                <button class="knapp knapp-dark" data-goto-tab="bilag">Gå til bilagssiden</button>
+              </div>
+            </article>
+
+            <article class="kort">
+              <h2 class="title">MVA og meldinger</h2>
+              <ul class="liste">
+                <li>2026-01: <span class="badge info">PÅGÅR</span></li>
+                <li>2025-12: <span class="badge ok">INNRAPPORTERT</span></li>
+                <li>Ny melding fra regnskapsfører om frist 10. mars</li>
+              </ul>
+              <div class="actions">
+                <button class="knapp" data-goto-tab="mva">Se MVA-side</button>
+                <button class="knapp knapp-dark" data-goto-tab="meldinger">Svar i meldinger</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-bilag">
+        <div class="kort">
+          <h2 class="title">Bilagsside (demo)</h2>
+          <p class="muted">Trykk handlinger for å se forventet respons.</p>
+          <div class="rad"><span>Taxi-kvittering januar</span><div class="actions"><button class="knapp" data-klikk="Filvelger åpnet (demo)">Last opp</button><button class="knapp" data-klikk="Status endret til OPPLASTET">Sett OPPLASTET</button></div></div>
+          <div class="rad"><span>Faktura leverandør ACME</span><div class="actions"><button class="knapp" data-klikk="Dokument koblet til voucher">Koble voucher</button><button class="knapp" data-klikk="Status endret til FERDIG">Sett FERDIG</button></div></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-meldinger">
+        <div class="layout">
           <article class="kort">
-            <h2 class="seksjon-tittel">KPI - Februar 2026</h2>
-            <p class="dempet">Sammenlignet med forrige måned</p>
-
-            <div class="kpi-grid">
-              <div class="kpi kpi-omsetning">
-                <h3>Omsetning</h3>
-                <p id="kpi-omsetning">320 000 kr</p>
-                <small>+8.2%</small>
-              </div>
-              <div class="kpi kpi-kost">
-                <h3>Kostnader</h3>
-                <p id="kpi-kost">185 000 kr</p>
-                <small>-2.1%</small>
-              </div>
-              <div class="kpi kpi-resultat">
-                <h3>Resultat</h3>
-                <p id="kpi-resultat">135 000 kr</p>
-                <small>+14.5%</small>
-              </div>
-            </div>
-
-            <div class="actions">
-              <button class="knapp" data-klikk="Periode satt til 2026-01 (demo)">Forrige måned</button>
-              <button class="knapp" data-klikk="Periode satt til 2026-02 (demo)">Nåværende måned</button>
-              <button class="knapp" id="simuler-knapp">Simuler nye tall</button>
-            </div>
+            <h2 class="title">Meldingstråder</h2>
+            <div class="rad"><span>Frist MVA Q1</span><button class="knapp" data-klikk="Tråd åpnet: Frist MVA Q1">Åpne</button></div>
+            <div class="rad"><span>Dokumentasjon lønn</span><button class="knapp" data-klikk="Tråd åpnet: Dokumentasjon lønn">Åpne</button></div>
+            <div class="rad"><span>Avstemming februar</span><button class="knapp" data-klikk="Tråd åpnet: Avstemming februar">Åpne</button></div>
           </article>
-
           <article class="kort">
-            <h2 class="seksjon-tittel">Trend siste 6 måneder</h2>
-            <div class="graf-wrap">
-              <svg viewBox="0 0 620 180" width="100%" aria-label="Linjegraf for resultat">
-                <polyline fill="none" stroke="#93c5fd" stroke-width="2" points="0,130 620,130"></polyline>
-                <polyline fill="none" stroke="#0f6288" stroke-width="4" points="20,120 120,105 220,112 320,90 420,74 520,56"></polyline>
-                <circle cx="20" cy="120" r="4" fill="#0f6288"></circle>
-                <circle cx="120" cy="105" r="4" fill="#0f6288"></circle>
-                <circle cx="220" cy="112" r="4" fill="#0f6288"></circle>
-                <circle cx="320" cy="90" r="4" fill="#0f6288"></circle>
-                <circle cx="420" cy="74" r="4" fill="#0f6288"></circle>
-                <circle cx="520" cy="56" r="4" fill="#0f6288"></circle>
-              </svg>
-              <div class="bars">
-                <div class="bar" style="height:72%"><span>Sep</span></div>
-                <div class="bar" style="height:67%"><span>Okt</span></div>
-                <div class="bar" style="height:63%"><span>Nov</span></div>
-                <div class="bar" style="height:75%"><span>Des</span></div>
-                <div class="bar" style="height:84%"><span>Jan</span></div>
-                <div class="bar" style="height:92%"><span>Feb</span></div>
-              </div>
+            <h2 class="title">Skriv melding</h2>
+            <input class="input" id="msg-title" placeholder="Emne" value="Frist MVA Q1" />
+            <div style="height:8px"></div>
+            <textarea class="textarea" id="msg-body" placeholder="Skriv melding her...">Hei! Kan dere laste opp manglende bilag innen fredag?</textarea>
+            <div class="actions">
+              <button class="knapp" id="msg-draft">Lagre utkast</button>
+              <button class="knapp knapp-dark" id="msg-send">Send melding</button>
             </div>
+            <p class="muted" id="msg-feedback">Ingen melding sendt ennå.</p>
           </article>
         </div>
+      </section>
 
-        <div class="stack">
-          <article class="kort">
-            <h2 class="seksjon-tittel">Manglende bilag</h2>
-            <div class="rad"><span>Kvittering - drivstoff</span><span class="badge b-var">ÅPEN</span></div>
-            <div class="rad"><span>Faktura INV-2026-22</span><span class="badge b-info">OPPLASTET</span></div>
-            <div class="rad"><span>Reiseregning Q1</span><span class="badge b-ok">FERDIG</span></div>
-            <div class="actions">
-              <button class="knapp" data-klikk="Opplasting simulert">Last opp bilag</button>
-              <button class="knapp" data-klikk="Bilag markert som linket (demo)">Marker som linket</button>
-            </div>
-          </article>
-
-          <article class="kort">
-            <h2 class="seksjon-tittel">MVA og meldinger</h2>
-            <ul class="liste">
-              <li>2026-01: <span class="badge b-info">PÅGÅR</span></li>
-              <li>2025-12: <span class="badge b-ok">INNRAPPORTERT</span></li>
-              <li>Ny melding fra regnskapsfører om frist 10. mars</li>
-            </ul>
-            <div class="actions">
-              <button class="knapp" data-klikk="MVA-status oppdatert (demo)">Oppdater MVA</button>
-              <button class="knapp knapp-primar" data-klikk="Ny melding sendt (demo)">Send melding</button>
-            </div>
-          </article>
+      <section class="view" id="view-mva">
+        <div class="kort">
+          <h2 class="title">MVA-side (demo)</h2>
+          <div class="rad"><span>Periode 2026-01</span><span class="badge info">PÅGÅR</span></div>
+          <div class="rad"><span>Periode 2025-12</span><span class="badge ok">INNRAPPORTERT</span></div>
+          <div class="actions">
+            <button class="knapp" data-klikk="Status satt til PÅGÅR">Sett PÅGÅR</button>
+            <button class="knapp" data-klikk="Status satt til INNRAPPORTERT">Sett INNRAPPORTERT</button>
+            <button class="knapp knapp-dark" data-klikk="MVA-rapport eksportert (demo)">Eksporter MVA-rapport</button>
+          </div>
         </div>
       </section>
     </main>
@@ -310,33 +213,76 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      const toast = document.getElementById("toast");
-      const tabs = document.querySelectorAll("[data-tab]");
+      const månedData = {
+        "2025-09": { label: "September 2025", omsetning: 248000, kost: 161000, resultat: 87000, o: "+3.1%", k: "+1.4%", r: "+6.2%", bars:[62,58,60,65,72,78], points:"20,122 120,112 220,116 320,104 420,93 520,84" },
+        "2025-10": { label: "Oktober 2025", omsetning: 256000, kost: 164000, resultat: 92000, o: "+3.2%", k: "+1.8%", r: "+5.8%", bars:[64,59,62,67,74,81], points:"20,119 120,109 220,114 320,101 420,90 520,80" },
+        "2025-11": { label: "November 2025", omsetning: 262000, kost: 170000, resultat: 92000, o: "+2.3%", k: "+3.7%", r: "0.0%", bars:[63,61,61,68,74,80], points:"20,120 120,110 220,110 320,98 420,90 520,81" },
+        "2025-12": { label: "Desember 2025", omsetning: 289000, kost: 181000, resultat: 108000, o: "+10.3%", k: "+6.4%", r: "+17.4%", bars:[68,64,65,73,82,88], points:"20,116 120,106 220,107 320,92 420,82 520,70" },
+        "2026-01": { label: "Januar 2026", omsetning: 301000, kost: 183000, resultat: 118000, o: "+4.1%", k: "+1.1%", r: "+9.3%", bars:[70,66,67,75,84,90], points:"20,114 120,103 220,104 320,90 420,78 520,64" },
+        "2026-02": { label: "Februar 2026", omsetning: 320000, kost: 185000, resultat: 135000, o: "+6.3%", k: "+1.1%", r: "+14.4%", bars:[72,67,63,75,84,92], points:"20,112 120,102 220,110 320,88 420,74 520,56" }
+      };
 
-      function visToast(tekst) {
-        toast.textContent = tekst;
-        toast.classList.add("vis");
-        setTimeout(() => toast.classList.remove("vis"), 1700);
+      const månedNøkler = Object.keys(månedData);
+      let aktivMåned = "2025-09";
+
+      const toast = document.getElementById("toast");
+      const title = document.getElementById("dashboard-title");
+      const om = document.getElementById("kpi-omsetning");
+      const ko = document.getElementById("kpi-kost");
+      const re = document.getElementById("kpi-resultat");
+      const oe = document.getElementById("kpi-omsetning-endring");
+      const ke = document.getElementById("kpi-kost-endring");
+      const rr = document.getElementById("kpi-resultat-endring");
+      const trendBars = document.getElementById("trend-bars");
+      const trendLine = document.getElementById("trend-line");
+
+      function kr(n) { return `${n.toLocaleString("nb-NO")} kr`; }
+      function visToast(txt) { toast.textContent = txt; toast.classList.add("vis"); setTimeout(() => toast.classList.remove("vis"), 1700); }
+
+      function renderMåned(key) {
+        aktivMåned = key;
+        const d = månedData[key];
+        title.textContent = `KPI - ${d.label}`;
+        om.textContent = kr(d.omsetning);
+        ko.textContent = kr(d.kost);
+        re.textContent = kr(d.resultat);
+        oe.textContent = d.o;
+        ke.textContent = d.k;
+        rr.textContent = d.r;
+        trendLine.setAttribute("points", d.points);
+        trendBars.innerHTML = d.bars.map((h, i) => `<div class="bar" style="height:${h}%"><span>${månedNøkler[i].slice(5)}</span></div>`).join("");
+        document.querySelectorAll("#month-buttons [data-month]").forEach((b) => b.classList.toggle("active", b.getAttribute("data-month") === key));
+        visToast(`Viser ${d.label}`);
       }
 
-      document.querySelectorAll("[data-klikk]").forEach((knapp) => {
-        knapp.addEventListener("click", () => visToast(knapp.getAttribute("data-klikk")));
+      document.querySelectorAll("#month-buttons [data-month]").forEach((b) => b.addEventListener("click", () => renderMåned(b.getAttribute("data-month"))));
+      document.getElementById("forrige-knapp").addEventListener("click", () => { const i = Math.max(0, månedNøkler.indexOf(aktivMåned) - 1); renderMåned(månedNøkler[i]); });
+      document.getElementById("neste-knapp").addEventListener("click", () => { const i = Math.min(månedNøkler.length - 1, månedNøkler.indexOf(aktivMåned) + 1); renderMåned(månedNøkler[i]); });
+      document.getElementById("simuler-knapp").addEventListener("click", () => { om.textContent = kr(Number(om.textContent.replace(/\D/g, "")) + 7000); re.textContent = kr(Number(re.textContent.replace(/\D/g, "")) + 7000); visToast("Simulerte tall oppdatert"); });
+
+      document.querySelectorAll("[data-klikk]").forEach((k) => k.addEventListener("click", () => visToast(k.getAttribute("data-klikk"))));
+
+      function gåTilTab(tab) {
+        document.querySelectorAll("[data-tab]").forEach((t) => t.classList.toggle("active", t.getAttribute("data-tab") === tab));
+        document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${tab}`));
+        visToast(`Byttet til ${tab}`);
+      }
+
+      document.querySelectorAll("[data-tab]").forEach((t) => t.addEventListener("click", () => gåTilTab(t.getAttribute("data-tab"))));
+      document.querySelectorAll("[data-goto-tab]").forEach((t) => t.addEventListener("click", () => gåTilTab(t.getAttribute("data-goto-tab"))));
+
+      document.getElementById("msg-draft").addEventListener("click", () => {
+        document.getElementById("msg-feedback").textContent = "Utkast lagret kl. " + new Date().toLocaleTimeString("nb-NO");
+        visToast("Utkast lagret");
       });
 
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          tabs.forEach((t) => t.classList.remove("active"));
-          tab.classList.add("active");
-          visToast(`Byttet til ${tab.getAttribute("data-tab")}-fane (demo)`);
-        });
+      document.getElementById("msg-send").addEventListener("click", () => {
+        const emne = document.getElementById("msg-title").value || "Uten emne";
+        document.getElementById("msg-feedback").textContent = `Melding sendt: ${emne}`;
+        visToast("Melding sendt (demo)");
       });
 
-      document.getElementById("simuler-knapp").addEventListener("click", () => {
-        document.getElementById("kpi-omsetning").textContent = "334 000 kr";
-        document.getElementById("kpi-kost").textContent = "189 500 kr";
-        document.getElementById("kpi-resultat").textContent = "144 500 kr";
-        visToast("Nye KPI-tall simulert");
-      });
+      renderMåned(aktivMåned);
     </script>
   </body>
 </html>
