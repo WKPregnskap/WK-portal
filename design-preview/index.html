@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WK Portal - Interaktiv Design Preview</title>
     <style>
-      :root { --bg:#f7fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#dbe6f0; --dark:#0f172a; --teal:#0f6288; --cyan:#0ea5b7; --ok:#16a34a; --warn:#d97706; }
+      :root { --bg:#f7fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#dbe6f0; --dark:#0f172a; --teal:#0f6288; --ok:#16a34a; --warn:#d97706; }
       * { box-sizing: border-box; }
       body { margin:0; font-family:"Avenir Next","Satoshi","Nunito Sans","Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 30%),radial-gradient(circle at 100% 0%, #f0f8ff 0%, transparent 34%),var(--bg); }
       .wrap { width:min(1160px,92vw); margin:0 auto; }
-      .top { padding:1rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+      .top { padding:1rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
       .logo { font-weight:700; letter-spacing:.05em; font-size:.92rem; }
       .hero { background:linear-gradient(130deg,#0f172a,#0f4060 55%,#0d5e7d); color:#ecfeff; border-radius:24px; padding:1.6rem; box-shadow:0 24px 40px rgb(15 23 42 / 24%); }
       .hero h1 { margin:.5rem 0; font-size:clamp(2rem,4.4vw,3.2rem); line-height:1.08; max-width:14ch; }
@@ -21,8 +21,8 @@
       .knapp:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgb(15 23 42 / 10%); }
       .knapp-dark { background:var(--dark); color:#fff; border-color:transparent; }
       .knapp-teal { background:linear-gradient(120deg,var(--teal),#0c4d6f); color:#fff; border-color:transparent; }
+      .knapp.active { background:#e2ecf6; border-color:#bfcede; }
       .tabs { margin:1rem 0; display:flex; flex-wrap:wrap; gap:8px; }
-      .tabs .knapp.active { background:#e2ecf6; border-color:#bfcede; }
       .view { display:none; }
       .view.active { display:block; }
       .layout { display:grid; grid-template-columns:1.25fr 1fr; gap:14px; }
@@ -51,22 +51,26 @@
       .ok { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; }
       .warn { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
       .info { background:#e0f2fe; color:#075985; border:1px solid #bae6fd; }
-      .input, .textarea { width:100%; border:1px solid #cbd5e1; border-radius:12px; padding:10px; font:inherit; }
+      .input, .textarea, .select { width:100%; border:1px solid #cbd5e1; border-radius:12px; padding:10px; font:inherit; background:#fff; }
       .textarea { min-height:110px; resize:vertical; }
       .liste { margin:0; padding-left:18px; color:#334155; }
       .liste li { margin:8px 0; }
+      .role-only { display:none; }
+      body.role-kunde .role-kunde { display:block; }
+      body.role-regnskapsforer .role-regnskapsforer { display:block; }
       .toast { position:fixed; right:16px; bottom:16px; background:#0f172a; color:#fff; border-radius:12px; padding:10px 12px; font-size:.88rem; opacity:0; transform:translateY(8px); transition:.2s ease; pointer-events:none; }
       .toast.vis { opacity:1; transform:translateY(0); }
       @media (max-width:980px){ .layout { grid-template-columns:1fr; } }
       @media (max-width:760px){ .kpi-grid{ grid-template-columns:1fr; } }
     </style>
   </head>
-  <body>
+  <body class="role-kunde">
     <header class="wrap top">
       <div class="logo">WERNER KLAUSEN REGNSKAP</div>
-      <div class="actions">
-        <button class="knapp" data-klikk="Bytter til kundevy (demo)">Kundevy</button>
-        <button class="knapp knapp-dark" data-klikk="Åpner meldingssenter (demo)">Meldingssenter</button>
+      <div class="actions" id="role-buttons">
+        <button class="knapp active" data-role="kunde">Kundevy</button>
+        <button class="knapp" data-role="regnskapsforer">Regnskapsførerview</button>
+        <button class="knapp knapp-dark" data-klikk="Meldingssenter åpnet (demo)">Meldingssenter</button>
       </div>
     </header>
 
@@ -75,11 +79,12 @@
         <div class="hero-flex">
           <div>
             <p class="muted" style="color:#bfdbfe; margin:0;">WK PORTAL - INTERAKTIV PROTOTYPE</p>
-            <h1>Allt är klickbart med reaktion i UI</h1>
-            <p class="lead">Månader byter KPI-värden och varje knapp visar vad som händer.</p>
+            <h1>Lik opplevelse for begge roller med små forskjeller</h1>
+            <p class="lead">Kundevy og regnskapsførerview deler design, men viser olika handlingar och dataflöden.</p>
           </div>
           <div class="actions">
-            <button class="knapp knapp-teal" data-klikk="Ny bilagsoppgave opprettet (demo)">Ny oppgave</button>
+            <button class="knapp knapp-teal role-only role-regnskapsforer" data-klikk="Ny bilagsoppgave opprettet (demo)">Ny oppgave</button>
+            <button class="knapp role-only role-kunde" data-klikk="Opplasting åpnet (demo)">Last opp bilag</button>
             <button class="knapp knapp-dark" data-klikk="Rapport eksportert (demo)">Eksporter</button>
           </div>
         </div>
@@ -102,7 +107,7 @@
         <div class="layout">
           <div class="stack">
             <article class="kort">
-              <h2 class="title" id="dashboard-title">KPI - Februari 2026</h2>
+              <h2 class="title" id="dashboard-title">KPI - September 2025</h2>
               <p class="muted">Sammenlignet med forrige måned</p>
               <div class="months" id="month-buttons">
                 <button class="knapp active" data-month="2025-09">Sep 2025</button>
@@ -137,28 +142,37 @@
           </div>
 
           <div class="stack">
+            <article class="kort role-only role-kunde">
+              <h2 class="title">Ditt selskap</h2>
+              <div class="rad"><span>Nordlys Drift AS</span><span class="badge info">KUNDE</span></div>
+              <div class="rad"><span>Ansvarlig rådgiver</span><span>Silje Larsen</span></div>
+              <div class="actions">
+                <button class="knapp" data-klikk="Kontaktforespørsel sendt (demo)">Kontakt regnskapsfører</button>
+              </div>
+            </article>
+
+            <article class="kort role-only role-regnskapsforer">
+              <h2 class="title">Kundekontroll</h2>
+              <select class="select" id="kunde-select">
+                <option>Nordlys Drift AS</option>
+                <option>Fjord Handel AS</option>
+                <option>Arktisk Bygg AS</option>
+              </select>
+              <div class="actions">
+                <button class="knapp" data-klikk="Kundedata byttet (demo)">Bytt kunde</button>
+                <button class="knapp knapp-dark" data-klikk="Oppgave opprettet for valgt kunde (demo)">Opprett oppgave</button>
+              </div>
+            </article>
+
             <article class="kort">
               <h2 class="title">Manglende bilag</h2>
               <div class="rad"><span>Kvittering - drivstoff</span><span class="badge warn">ÅPEN</span></div>
               <div class="rad"><span>Faktura INV-2026-22</span><span class="badge info">OPPLASTET</span></div>
               <div class="rad"><span>Reiseregning Q1</span><span class="badge ok">FERDIG</span></div>
               <div class="actions">
-                <button class="knapp" data-klikk="Opplasting simulert">Last opp bilag</button>
-                <button class="knapp" data-klikk="Bilag markert som linket (demo)">Marker som linket</button>
+                <button class="knapp role-only role-kunde" data-klikk="Filvelger åpnet (demo)">Last opp bilag</button>
+                <button class="knapp role-only role-regnskapsforer" data-klikk="Status endret til LINKET (demo)">Marker som linket</button>
                 <button class="knapp knapp-dark" data-goto-tab="bilag">Gå til bilagssiden</button>
-              </div>
-            </article>
-
-            <article class="kort">
-              <h2 class="title">MVA og meldinger</h2>
-              <ul class="liste">
-                <li>2026-01: <span class="badge info">PÅGÅR</span></li>
-                <li>2025-12: <span class="badge ok">INNRAPPORTERT</span></li>
-                <li>Ny melding fra regnskapsfører om frist 10. mars</li>
-              </ul>
-              <div class="actions">
-                <button class="knapp" data-goto-tab="mva">Se MVA-side</button>
-                <button class="knapp knapp-dark" data-goto-tab="meldinger">Svar i meldinger</button>
               </div>
             </article>
           </div>
@@ -168,9 +182,8 @@
       <section class="view" id="view-bilag">
         <div class="kort">
           <h2 class="title">Bilagsside (demo)</h2>
-          <p class="muted">Trykk handlinger for å se forventet respons.</p>
-          <div class="rad"><span>Taxi-kvittering januar</span><div class="actions"><button class="knapp" data-klikk="Filvelger åpnet (demo)">Last opp</button><button class="knapp" data-klikk="Status endret til OPPLASTET">Sett OPPLASTET</button></div></div>
-          <div class="rad"><span>Faktura leverandør ACME</span><div class="actions"><button class="knapp" data-klikk="Dokument koblet til voucher">Koble voucher</button><button class="knapp" data-klikk="Status endret til FERDIG">Sett FERDIG</button></div></div>
+          <div class="rad"><span>Taxi-kvittering januar</span><div class="actions"><button class="knapp" data-klikk="Filvalg åpnet (demo)">Last opp</button><button class="knapp role-only role-regnskapsforer" data-klikk="Godkjent av regnskapsfører">Godkjenn</button></div></div>
+          <div class="rad"><span>Faktura leverandør ACME</span><div class="actions"><button class="knapp" data-klikk="Dokument koblet til voucher">Koble voucher</button><button class="knapp" data-klikk="Status satt til FERDIG">Sett FERDIG</button></div></div>
         </div>
       </section>
 
@@ -267,7 +280,6 @@
         document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${tab}`));
         visToast(`Byttet til ${tab}`);
       }
-
       document.querySelectorAll("[data-tab]").forEach((t) => t.addEventListener("click", () => gåTilTab(t.getAttribute("data-tab"))));
       document.querySelectorAll("[data-goto-tab]").forEach((t) => t.addEventListener("click", () => gåTilTab(t.getAttribute("data-goto-tab"))));
 
@@ -275,11 +287,21 @@
         document.getElementById("msg-feedback").textContent = "Utkast lagret kl. " + new Date().toLocaleTimeString("nb-NO");
         visToast("Utkast lagret");
       });
-
       document.getElementById("msg-send").addEventListener("click", () => {
         const emne = document.getElementById("msg-title").value || "Uten emne";
         document.getElementById("msg-feedback").textContent = `Melding sendt: ${emne}`;
         visToast("Melding sendt (demo)");
+      });
+
+      document.querySelectorAll("#role-buttons [data-role]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const role = btn.getAttribute("data-role");
+          document.body.classList.remove("role-kunde", "role-regnskapsforer");
+          document.body.classList.add(`role-${role}`);
+          document.querySelectorAll("#role-buttons [data-role]").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          visToast(role === "kunde" ? "Byttet til kundevy" : "Byttet til regnskapsførerview");
+        });
       });
 
       renderMåned(aktivMåned);
