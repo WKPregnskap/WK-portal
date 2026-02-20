@@ -3,206 +3,340 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WK Portal Design Preview</title>
+    <title>WK Portal - Interaktiv Design Preview</title>
     <style>
       :root {
-        --bakgrunn: #f8fafc;
-        --mork: #0f172a;
-        --kort: #ffffff;
-        --kant: #e2e8f0;
+        --bakgrunn: #f7fafc;
+        --flate: #ffffff;
+        --tekst: #0f172a;
         --dempet: #64748b;
-        --accent: #0f6288;
-        --hero: clamp(2rem, 4vw, 3.25rem);
-        --seksjon: clamp(1.4rem, 2.6vw, 2rem);
+        --kant: #dbe6f0;
+        --primar: #0f172a;
+        --teal: #0f6288;
+        --cyan: #0ea5b7;
+        --green: #16a34a;
+        --amber: #d97706;
+        --hero: clamp(2rem, 4.4vw, 3.2rem);
       }
 
       * { box-sizing: border-box; }
+
       body {
         margin: 0;
         font-family: "Avenir Next", "Satoshi", "Nunito Sans", "Segoe UI", sans-serif;
-        color: var(--mork);
+        color: var(--tekst);
         background:
-          radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 32%),
-          radial-gradient(circle at 100% 0%, #f3f7ff 0%, transparent 35%),
+          radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 30%),
+          radial-gradient(circle at 100% 0%, #f0f8ff 0%, transparent 34%),
           var(--bakgrunn);
       }
 
-      .wrap {
-        width: min(1100px, 92vw);
-        margin: 0 auto;
-      }
+      .wrap { width: min(1160px, 92vw); margin: 0 auto; }
 
       .top {
+        padding: 1rem 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 0;
+        gap: 1rem;
       }
 
-      .logo {
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        font-size: 0.95rem;
-      }
+      .logo { font-weight: 700; font-size: 0.92rem; letter-spacing: 0.05em; }
 
       .knapp {
         border: 1px solid var(--kant);
-        border-radius: 12px;
         background: #fff;
+        border-radius: 12px;
         padding: 10px 14px;
         font-weight: 600;
-        color: var(--mork);
+        color: var(--tekst);
+        cursor: pointer;
+        transition: 0.2s ease;
       }
+
+      .knapp:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgb(15 23 42 / 10%); }
+
+      .knapp-primar { background: var(--primar); color: #fff; border-color: transparent; }
+      .knapp-teal { background: linear-gradient(120deg, var(--teal), #0c4d6f); color: #fff; border-color: transparent; }
+      .knapp-cyan { background: linear-gradient(120deg, var(--cyan), #0d7894); color: #fff; border-color: transparent; }
 
       .hero {
-        padding: 24px 0 38px;
+        background: linear-gradient(130deg, #0f172a, #0f4060 55%, #0d5e7d);
+        border-radius: 24px;
+        color: #ecfeff;
+        padding: 1.7rem;
+        box-shadow: 0 24px 40px rgb(15 23 42 / 24%);
       }
 
-      h1 {
-        margin: 10px 0;
-        font-size: var(--hero);
-        line-height: 1.08;
-        max-width: 14ch;
-      }
+      h1 { margin: 0.55rem 0; font-size: var(--hero); line-height: 1.08; max-width: 14ch; }
+      .lead { color: #dbeafe; max-width: 62ch; }
 
-      .lead {
-        color: #334155;
-        max-width: 62ch;
-      }
+      .hero-flex { display: flex; align-items: end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 
-      .badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      .badge {
-        border: 1px solid #cbd5e1;
-        background: #fff;
+      .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 1rem; }
+      .chip {
+        border: 1px solid rgb(255 255 255 / 32%);
+        background: rgb(255 255 255 / 8%);
+        color: #f8fafc;
         border-radius: 999px;
         padding: 7px 12px;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 600;
       }
 
-      .grid {
+      .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 1.2rem 0; }
+      .tabs .knapp.active { background: #e2ecf6; border-color: #bfcede; }
+
+      .layout {
+        margin-top: 1.1rem;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        grid-template-columns: 1.25fr 1fr;
         gap: 14px;
-        margin: 6px 0 36px;
       }
 
       .kort {
-        background: var(--kort);
         border: 1px solid var(--kant);
         border-radius: 16px;
-        padding: 16px;
-        box-shadow: 0 10px 24px rgb(15 23 42 / 6%);
+        background: var(--flate);
+        box-shadow: 0 10px 22px rgb(15 23 42 / 6%);
+        padding: 15px;
       }
 
-      .kort h2 {
-        margin: 2px 0 6px;
-        font-size: var(--seksjon);
+      .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
+
+      .kpi {
+        border-radius: 14px;
+        padding: 14px;
+        color: #fff;
       }
 
-      .stat {
-        font-size: 1.65rem;
-        font-weight: 700;
-        margin: 8px 0;
+      .kpi h3 { margin: 0; font-size: 0.84rem; font-weight: 600; opacity: 0.95; }
+      .kpi p { margin: 7px 0 0; font-size: 1.5rem; font-weight: 700; }
+      .kpi small { opacity: 0.88; font-weight: 500; }
+
+      .kpi-omsetning { background: linear-gradient(125deg, #0f6288, #0d7aa0); }
+      .kpi-kost { background: linear-gradient(125deg, #1e293b, #334155); }
+      .kpi-resultat { background: linear-gradient(125deg, #16a34a, #15803d); }
+
+      .seksjon-tittel { margin: 2px 0 8px; font-size: 1.18rem; }
+      .dempet { color: var(--dempet); font-size: 0.9rem; }
+
+      .graf-wrap {
+        border: 1px solid #e5edf5;
+        border-radius: 12px;
+        padding: 10px;
+        background: linear-gradient(180deg, #f8fbff, #ffffff);
       }
 
-      .dempet { color: var(--dempet); font-size: 0.92rem; }
+      .bars { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; align-items: end; height: 160px; margin-top: 8px; }
+      .bar {
+        background: linear-gradient(180deg, #0ea5b7, #0f6288);
+        border-radius: 8px 8px 4px 4px;
+        position: relative;
+      }
 
-      .status {
-        margin-top: 14px;
+      .bar span { position: absolute; bottom: -22px; width: 100%; text-align: center; font-size: 0.74rem; color: #64748b; }
+
+      .liste { margin: 0; padding-left: 18px; color: #334155; }
+      .liste li { margin: 8px 0; }
+
+      .badge {
         display: inline-block;
-        padding: 7px 10px;
         border-radius: 999px;
-        background: #ecfeff;
-        border: 1px solid #bae6fd;
-        color: var(--accent);
-        font-size: 0.78rem;
+        padding: 6px 9px;
+        font-size: 0.73rem;
         font-weight: 700;
-        letter-spacing: 0.03em;
+        letter-spacing: 0.02em;
       }
 
-      .liste { margin: 10px 0 0; padding-left: 18px; color: #334155; }
-      .liste li { margin: 7px 0; }
+      .b-ok { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+      .b-var { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+      .b-info { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
 
-      footer {
-        border-top: 1px solid var(--kant);
-        padding: 18px 0 28px;
-        color: #64748b;
-        font-size: 0.87rem;
+      .stack { display: grid; gap: 12px; }
+
+      .rad { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #edf2f7; }
+      .rad:last-child { border-bottom: 0; }
+
+      .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+      .toast {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        background: #0f172a;
+        color: #fff;
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 0.88rem;
+        opacity: 0;
+        transform: translateY(8px);
+        transition: 0.2s ease;
+        pointer-events: none;
+      }
+
+      .toast.vis { opacity: 1; transform: translateY(0); }
+
+      @media (max-width: 980px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 760px) {
+        .kpi-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
     <header class="wrap top">
       <div class="logo">WERNER KLAUSEN REGNSKAP</div>
-      <button class="knapp">Designvisning</button>
+      <div class="actions">
+        <button class="knapp" data-klikk="Bytter til kundevy (demo)">Kundevy</button>
+        <button class="knapp knapp-primar" data-klikk="Åpner meldingssenter (demo)">Meldingssenter</button>
+      </div>
     </header>
 
     <main class="wrap">
       <section class="hero">
-        <p class="dempet">WK PORTAL</p>
-        <h1>Kundeportal med rolig og profesjonelt uttrykk</h1>
-        <p class="lead">Dette er en statisk design-preview. Her ser du layout, farger, typografi og komponentstil før backend kobles på.</p>
-        <div class="badges">
-          <span class="badge">Manglende bilag</span>
-          <span class="badge">Portal-meldinger</span>
-          <span class="badge">MVA-status</span>
-          <span class="badge">Månedsdashboard</span>
+        <div class="hero-flex">
+          <div>
+            <p class="dempet" style="color:#bfdbfe; margin: 0;">WK PORTAL - INTERAKTIV PROTOTYPE</p>
+            <h1>Finere design med farger, trender og testbar interaksjon</h1>
+            <p class="lead">Alt her er klikkbart for demo. Dataene er mock-data for visning av dashboard-opplevelsen.</p>
+          </div>
+          <div class="actions">
+            <button class="knapp knapp-teal" data-klikk="Ny bilagsoppgave opprettet (demo)">Ny oppgave</button>
+            <button class="knapp knapp-cyan" data-klikk="Rapport eksportert (demo)">Eksporter</button>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">Månedsdashboard</span>
+          <span class="chip">Manglende bilag</span>
+          <span class="chip">MVA-status</span>
+          <span class="chip">Portal-meldinger</span>
         </div>
       </section>
 
-      <section class="grid">
-        <article class="kort">
-          <p class="dempet">Omsetning</p>
-          <p class="stat">320 000 kr</p>
-          <p class="dempet">Periode: 2026-02</p>
-          <span class="status">TILKOBLET</span>
-        </article>
+      <div class="tabs" style="margin-top: 14px;">
+        <button class="knapp active" data-tab="dashboard">Dashboard</button>
+        <button class="knapp" data-tab="bilag">Bilag</button>
+        <button class="knapp" data-tab="meldinger">Meldinger</button>
+        <button class="knapp" data-tab="mva">MVA</button>
+      </div>
 
-        <article class="kort">
-          <p class="dempet">Kostnader</p>
-          <p class="stat">185 000 kr</p>
-          <p class="dempet">Topppost: Lønn</p>
-          <span class="status">OPPDATERT</span>
-        </article>
+      <section class="layout">
+        <div class="stack">
+          <article class="kort">
+            <h2 class="seksjon-tittel">KPI - Februar 2026</h2>
+            <p class="dempet">Sammenlignet med forrige måned</p>
 
-        <article class="kort">
-          <p class="dempet">Resultat</p>
-          <p class="stat">135 000 kr</p>
-          <p class="dempet">Sist synket: i dag</p>
-          <span class="status">KLAR</span>
-        </article>
-      </section>
+            <div class="kpi-grid">
+              <div class="kpi kpi-omsetning">
+                <h3>Omsetning</h3>
+                <p id="kpi-omsetning">320 000 kr</p>
+                <small>+8.2%</small>
+              </div>
+              <div class="kpi kpi-kost">
+                <h3>Kostnader</h3>
+                <p id="kpi-kost">185 000 kr</p>
+                <small>-2.1%</small>
+              </div>
+              <div class="kpi kpi-resultat">
+                <h3>Resultat</h3>
+                <p id="kpi-resultat">135 000 kr</p>
+                <small>+14.5%</small>
+              </div>
+            </div>
 
-      <section class="grid">
-        <article class="kort">
-          <h2>Manglende bilag</h2>
-          <ul class="liste">
-            <li>Mangler kvittering for drivstoff</li>
-            <li>Mangler faktura INV-2026-22</li>
-            <li>Bekreftelse på reiseregning</li>
-          </ul>
-        </article>
+            <div class="actions">
+              <button class="knapp" data-klikk="Periode satt til 2026-01 (demo)">Forrige måned</button>
+              <button class="knapp" data-klikk="Periode satt til 2026-02 (demo)">Nåværende måned</button>
+              <button class="knapp" id="simuler-knapp">Simuler nye tall</button>
+            </div>
+          </article>
 
-        <article class="kort">
-          <h2>MVA</h2>
-          <ul class="liste">
-            <li>2026-01: Pågår</li>
-            <li>2025-12: Innrapportert</li>
-            <li>2025-11: Innrapportert</li>
-          </ul>
-        </article>
+          <article class="kort">
+            <h2 class="seksjon-tittel">Trend siste 6 måneder</h2>
+            <div class="graf-wrap">
+              <svg viewBox="0 0 620 180" width="100%" aria-label="Linjegraf for resultat">
+                <polyline fill="none" stroke="#93c5fd" stroke-width="2" points="0,130 620,130"></polyline>
+                <polyline fill="none" stroke="#0f6288" stroke-width="4" points="20,120 120,105 220,112 320,90 420,74 520,56"></polyline>
+                <circle cx="20" cy="120" r="4" fill="#0f6288"></circle>
+                <circle cx="120" cy="105" r="4" fill="#0f6288"></circle>
+                <circle cx="220" cy="112" r="4" fill="#0f6288"></circle>
+                <circle cx="320" cy="90" r="4" fill="#0f6288"></circle>
+                <circle cx="420" cy="74" r="4" fill="#0f6288"></circle>
+                <circle cx="520" cy="56" r="4" fill="#0f6288"></circle>
+              </svg>
+              <div class="bars">
+                <div class="bar" style="height:72%"><span>Sep</span></div>
+                <div class="bar" style="height:67%"><span>Okt</span></div>
+                <div class="bar" style="height:63%"><span>Nov</span></div>
+                <div class="bar" style="height:75%"><span>Des</span></div>
+                <div class="bar" style="height:84%"><span>Jan</span></div>
+                <div class="bar" style="height:92%"><span>Feb</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="stack">
+          <article class="kort">
+            <h2 class="seksjon-tittel">Manglende bilag</h2>
+            <div class="rad"><span>Kvittering - drivstoff</span><span class="badge b-var">ÅPEN</span></div>
+            <div class="rad"><span>Faktura INV-2026-22</span><span class="badge b-info">OPPLASTET</span></div>
+            <div class="rad"><span>Reiseregning Q1</span><span class="badge b-ok">FERDIG</span></div>
+            <div class="actions">
+              <button class="knapp" data-klikk="Opplasting simulert">Last opp bilag</button>
+              <button class="knapp" data-klikk="Bilag markert som linket (demo)">Marker som linket</button>
+            </div>
+          </article>
+
+          <article class="kort">
+            <h2 class="seksjon-tittel">MVA og meldinger</h2>
+            <ul class="liste">
+              <li>2026-01: <span class="badge b-info">PÅGÅR</span></li>
+              <li>2025-12: <span class="badge b-ok">INNRAPPORTERT</span></li>
+              <li>Ny melding fra regnskapsfører om frist 10. mars</li>
+            </ul>
+            <div class="actions">
+              <button class="knapp" data-klikk="MVA-status oppdatert (demo)">Oppdater MVA</button>
+              <button class="knapp knapp-primar" data-klikk="Ny melding sendt (demo)">Send melding</button>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <div class="wrap">Design preview for WK Portal. Backend kobles på i neste fase.</div>
-    </footer>
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const toast = document.getElementById("toast");
+      const tabs = document.querySelectorAll("[data-tab]");
+
+      function visToast(tekst) {
+        toast.textContent = tekst;
+        toast.classList.add("vis");
+        setTimeout(() => toast.classList.remove("vis"), 1700);
+      }
+
+      document.querySelectorAll("[data-klikk]").forEach((knapp) => {
+        knapp.addEventListener("click", () => visToast(knapp.getAttribute("data-klikk")));
+      });
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          visToast(`Byttet til ${tab.getAttribute("data-tab")}-fane (demo)`);
+        });
+      });
+
+      document.getElementById("simuler-knapp").addEventListener("click", () => {
+        document.getElementById("kpi-omsetning").textContent = "334 000 kr";
+        document.getElementById("kpi-kost").textContent = "189 500 kr";
+        document.getElementById("kpi-resultat").textContent = "144 500 kr";
+        visToast("Nye KPI-tall simulert");
+      });
+    </script>
   </body>
 </html>
