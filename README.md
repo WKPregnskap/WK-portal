@@ -76,8 +76,8 @@ npm run arbeider
 
 ## Om GitHub Pages
 
-Denne løsningen er en fullstack-applikasjon med API-ruter, autentisering og database.
-GitHub Pages støtter kun statisk hosting og kan derfor bare brukes til begrenset visning.
+GitHub Pages er satt opp til å publisere en ren designvisning fra `design-preview/index.html`.
+Dette lar deg godkjenne UI før backend aktiveres.
 For full funksjonalitet anbefales serverdrift (for eksempel Vercel, Railway eller VPS).
 
 ## Feilsøking

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WK Portal Design Preview</title>
+    <style>
+      :root {
+        --bakgrunn: #f8fafc;
+        --mork: #0f172a;
+        --kort: #ffffff;
+        --kant: #e2e8f0;
+        --dempet: #64748b;
+        --accent: #0f6288;
+        --hero: clamp(2rem, 4vw, 3.25rem);
+        --seksjon: clamp(1.4rem, 2.6vw, 2rem);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Satoshi", "Nunito Sans", "Segoe UI", sans-serif;
+        color: var(--mork);
+        background:
+          radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 32%),
+          radial-gradient(circle at 100% 0%, #f3f7ff 0%, transparent 35%),
+          var(--bakgrunn);
+      }
+
+      .wrap {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+      }
+
+      .logo {
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        font-size: 0.95rem;
+      }
+
+      .knapp {
+        border: 1px solid var(--kant);
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px 14px;
+        font-weight: 600;
+        color: var(--mork);
+      }
+
+      .hero {
+        padding: 24px 0 38px;
+      }
+
+      h1 {
+        margin: 10px 0;
+        font-size: var(--hero);
+        line-height: 1.08;
+        max-width: 14ch;
+      }
+
+      .lead {
+        color: #334155;
+        max-width: 62ch;
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .badge {
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 0.82rem;
+        font-weight: 600;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 14px;
+        margin: 6px 0 36px;
+      }
+
+      .kort {
+        background: var(--kort);
+        border: 1px solid var(--kant);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: 0 10px 24px rgb(15 23 42 / 6%);
+      }
+
+      .kort h2 {
+        margin: 2px 0 6px;
+        font-size: var(--seksjon);
+      }
+
+      .stat {
+        font-size: 1.65rem;
+        font-weight: 700;
+        margin: 8px 0;
+      }
+
+      .dempet { color: var(--dempet); font-size: 0.92rem; }
+
+      .status {
+        margin-top: 14px;
+        display: inline-block;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: #ecfeff;
+        border: 1px solid #bae6fd;
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+
+      .liste { margin: 10px 0 0; padding-left: 18px; color: #334155; }
+      .liste li { margin: 7px 0; }
+
+      footer {
+        border-top: 1px solid var(--kant);
+        padding: 18px 0 28px;
+        color: #64748b;
+        font-size: 0.87rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap top">
+      <div class="logo">WERNER KLAUSEN REGNSKAP</div>
+      <button class="knapp">Designvisning</button>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <p class="dempet">WK PORTAL</p>
+        <h1>Kundeportal med rolig og profesjonelt uttrykk</h1>
+        <p class="lead">Dette er en statisk design-preview. Her ser du layout, farger, typografi og komponentstil før backend kobles på.</p>
+        <div class="badges">
+          <span class="badge">Manglende bilag</span>
+          <span class="badge">Portal-meldinger</span>
+          <span class="badge">MVA-status</span>
+          <span class="badge">Månedsdashboard</span>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="kort">
+          <p class="dempet">Omsetning</p>
+          <p class="stat">320 000 kr</p>
+          <p class="dempet">Periode: 2026-02</p>
+          <span class="status">TILKOBLET</span>
+        </article>
+
+        <article class="kort">
+          <p class="dempet">Kostnader</p>
+          <p class="stat">185 000 kr</p>
+          <p class="dempet">Topppost: Lønn</p>
+          <span class="status">OPPDATERT</span>
+        </article>
+
+        <article class="kort">
+          <p class="dempet">Resultat</p>
+          <p class="stat">135 000 kr</p>
+          <p class="dempet">Sist synket: i dag</p>
+          <span class="status">KLAR</span>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="kort">
+          <h2>Manglende bilag</h2>
+          <ul class="liste">
+            <li>Mangler kvittering for drivstoff</li>
+            <li>Mangler faktura INV-2026-22</li>
+            <li>Bekreftelse på reiseregning</li>
+          </ul>
+        </article>
+
+        <article class="kort">
+          <h2>MVA</h2>
+          <ul class="liste">
+            <li>2026-01: Pågår</li>
+            <li>2025-12: Innrapportert</li>
+            <li>2025-11: Innrapportert</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">Design preview for WK Portal. Backend kobles på i neste fase.</div>
+    </footer>
+  </body>
+</html>
