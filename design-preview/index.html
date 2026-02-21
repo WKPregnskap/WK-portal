@@ -16,7 +16,8 @@
       .lead { color:#dbeafe; max-width:62ch; }
       .hero-flex { display:flex; justify-content:space-between; align-items:end; gap:1rem; flex-wrap:wrap; }
       .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:1rem; }
-      .chip { border:1px solid rgb(255 255 255 / 32%); background:rgb(255 255 255 / 8%); border-radius:999px; padding:7px 12px; font-size:.8rem; font-weight:600; }
+      .chip { border:1px solid rgb(255 255 255 / 32%); background:rgb(255 255 255 / 8%); border-radius:999px; padding:7px 12px; font-size:.8rem; font-weight:600; color:#f8fafc; cursor:pointer; }
+      .chip:hover { background: rgb(255 255 255 / 15%); }
       .knapp { border:1px solid var(--line); background:#fff; color:var(--text); border-radius:12px; padding:10px 14px; font-weight:600; cursor:pointer; transition:.2s ease; }
       .knapp:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgb(15 23 42 / 10%); }
       .knapp-dark { background:var(--dark); color:#fff; border-color:transparent; }
@@ -89,10 +90,10 @@
           </div>
         </div>
         <div class="chips">
-          <span class="chip">Månedsdashboard</span>
-          <span class="chip">Manglende bilag</span>
-          <span class="chip">MVA-status</span>
-          <span class="chip">Portal-meldinger</span>
+          <button class="chip" data-goto-tab="dashboard">Månedsdashboard</button>
+          <button class="chip" data-goto-tab="bilag">Manglende bilag</button>
+          <button class="chip" data-goto-tab="mva">MVA-status</button>
+          <button class="chip" data-goto-tab="meldinger">Portal-meldinger</button>
         </div>
       </section>
 
