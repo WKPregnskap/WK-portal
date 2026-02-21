@@ -5,30 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WK Portal - Interaktiv Design Preview</title>
     <style>
-      :root { --bg:#f7fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#dbe6f0; --dark:#0f172a; --teal:#0f6288; --ok:#16a34a; --warn:#d97706; }
+      :root { --bg:#f8fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; --dark:#0f172a; --teal:#0f6288; --ok:#166534; --warn:#92400e; }
       * { box-sizing: border-box; }
-      body { margin:0; font-family:"Avenir Next","Satoshi","Nunito Sans","Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 30%),radial-gradient(circle at 100% 0%, #f0f8ff 0%, transparent 34%),var(--bg); }
+      body { margin:0; font-family:"Avenir Next","Satoshi","Nunito Sans","Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 0% 0%, #f8fbff 0%, transparent 32%),radial-gradient(circle at 100% 0%, #f3f7ff 0%, transparent 35%),var(--bg); line-height:1.55; }
       .wrap { width:min(1160px,92vw); margin:0 auto; }
       .top { padding:1rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
-      .logo-img { height: 56px; width: auto; display:block; }
-      .hero { background:linear-gradient(130deg,#0f172a,#0f4060 55%,#0d5e7d); color:#ecfeff; border-radius:24px; padding:1.6rem; box-shadow:0 24px 40px rgb(15 23 42 / 24%); }
+      .logo-img { height:56px; width:auto; display:block; }
+      .hero { background:linear-gradient(135deg,#0f172a 0%,#1e293b 45%,#0f6288 100%); color:#ecfeff; border-radius:24px; padding:1.6rem; box-shadow:0 20px 34px rgb(15 23 42 / 20%); }
       .hero h1 { margin:.5rem 0; font-size:clamp(2rem,4.4vw,3.2rem); line-height:1.08; max-width:14ch; }
       .lead { color:#dbeafe; max-width:62ch; }
       .hero-flex { display:flex; justify-content:space-between; align-items:end; gap:1rem; flex-wrap:wrap; }
       .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:1rem; }
-      .chip { border:1px solid rgb(255 255 255 / 32%); background:rgb(255 255 255 / 8%); border-radius:999px; padding:7px 12px; font-size:.8rem; font-weight:600; color:#f8fafc; cursor:pointer; }
-      .chip:hover { background: rgb(255 255 255 / 15%); }
+      .chip { border:1.4px solid rgb(255 255 255 / 24%); background:rgb(255 255 255 / 3%); border-radius:999px; padding:8px 18px; font-size:.85rem; font-weight:600; color:#f8fafc; cursor:pointer; }
+      .chip:hover { background:rgb(255 255 255 / 10%); transform:translateY(-1px); }
       .knapp { border:1px solid var(--line); background:#fff; color:var(--text); border-radius:12px; padding:10px 14px; font-weight:600; cursor:pointer; transition:.2s ease; }
-      .knapp:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgb(15 23 42 / 10%); }
+      .knapp:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgb(15 23 42 / 12%); }
       .knapp-dark { background:var(--dark); color:#fff; border-color:transparent; }
-      .knapp-teal { background:linear-gradient(120deg,var(--teal),#0c4d6f); color:#fff; border-color:transparent; }
+      .knapp-teal { background:#0f6288; color:#fff; border-color:transparent; }
       .knapp.active { background:#e2ecf6; border-color:#bfcede; }
       .tabs { margin:1rem 0; display:flex; flex-wrap:wrap; gap:8px; }
       .view { display:none; }
       .view.active { display:block; }
       .layout { display:grid; grid-template-columns:1.25fr 1fr; gap:14px; }
       .stack { display:grid; gap:12px; }
-      .kort { border:1px solid var(--line); border-radius:16px; background:var(--card); box-shadow:0 10px 22px rgb(15 23 42 / 6%); padding:15px; }
+      .kort { border:1px solid var(--line); border-radius:20px; background:var(--card); box-shadow:0 10px 24px rgb(15 23 42 / 6%); padding:16px; }
       .title { margin:2px 0 8px; font-size:1.18rem; }
       .muted { color:var(--muted); font-size:.9rem; }
       .kpi-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:14px 0; }
@@ -36,16 +36,16 @@
       .kpi h3 { margin:0; font-size:.84rem; }
       .kpi p { margin:7px 0 0; font-size:1.5rem; font-weight:700; }
       .kpi small { opacity:.9; }
-      .kpi-a { background:linear-gradient(125deg,#0f6288,#0d7aa0); }
-      .kpi-b { background:linear-gradient(125deg,#1e293b,#334155); }
-      .kpi-c { background:linear-gradient(125deg,#16a34a,#15803d); }
+      .kpi-a { background:linear-gradient(125deg,#0f6288,#0f7a93); }
+      .kpi-b { background:linear-gradient(125deg,#0f172a,#1e293b); }
+      .kpi-c { background:linear-gradient(125deg,#166534,#15803d); }
       .actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-      .months { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+      .months { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:8px; margin-top:10px; }
       .months .knapp.active { background:#dff2fb; border-color:#9fdaf0; }
       .graf-wrap { border:1px solid #e5edf5; border-radius:12px; padding:10px; background:linear-gradient(180deg,#f8fbff,#fff); }
-      .bars { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; align-items:end; height:150px; margin-top:8px; }
-      .bar { background:linear-gradient(180deg,#0ea5b7,#0f6288); border-radius:8px 8px 4px 4px; position:relative; }
-      .bar span { position:absolute; bottom:-22px; width:100%; text-align:center; font-size:.74rem; color:#64748b; }
+      .bars { display:grid; grid-template-columns:repeat(12,1fr); gap:6px; align-items:end; height:170px; margin-top:8px; }
+      .bar { background:linear-gradient(180deg,#0ea5b7,#0f6288); border-radius:6px 6px 3px 3px; position:relative; }
+      .bar span { position:absolute; bottom:-21px; width:100%; text-align:center; font-size:.7rem; color:#64748b; }
       .rad { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid #edf2f7; }
       .rad:last-child { border-bottom:0; }
       .badge { display:inline-block; border-radius:999px; padding:6px 9px; font-size:.73rem; font-weight:700; }
@@ -61,8 +61,8 @@
       body.role-regnskapsforer .role-regnskapsforer { display:block; }
       .toast { position:fixed; right:16px; bottom:16px; background:#0f172a; color:#fff; border-radius:12px; padding:10px 12px; font-size:.88rem; opacity:0; transform:translateY(8px); transition:.2s ease; pointer-events:none; }
       .toast.vis { opacity:1; transform:translateY(0); }
-      @media (max-width:980px){ .layout { grid-template-columns:1fr; } }
-      @media (max-width:760px){ .kpi-grid{ grid-template-columns:1fr; } }
+      @media (max-width:980px){ .layout { grid-template-columns:1fr; } .months{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
+      @media (max-width:760px){ .kpi-grid{ grid-template-columns:1fr; } .months{ grid-template-columns:repeat(3,minmax(0,1fr)); } .bars{ grid-template-columns:repeat(6,1fr); } }
     </style>
   </head>
   <body class="role-kunde">
@@ -80,8 +80,8 @@
         <div class="hero-flex">
           <div>
             <p class="muted" style="color:#bfdbfe; margin:0;">WK PORTAL - INTERAKTIV PROTOTYPE</p>
-            <h1>Lik opplevelse for begge roller med små forskjeller</h1>
-            <p class="lead">Kundevy og regnskapsførerview deler design, men viser olika handlingar och dataflöden.</p>
+            <h1>Rolling 12 month med full klikkbar test</h1>
+            <p class="lead">Velg hvilken som helst måned. KPI og 12-måneders graf oppdateres direkte.</p>
           </div>
           <div class="actions">
             <button class="knapp knapp-teal role-only role-regnskapsforer" data-klikk="Ny bilagsoppgave opprettet (demo)">Ny oppgave</button>
@@ -108,20 +108,13 @@
         <div class="layout">
           <div class="stack">
             <article class="kort">
-              <h2 class="title" id="dashboard-title">KPI - September 2025</h2>
-              <p class="muted">Sammenlignet med forrige måned</p>
-              <div class="months" id="month-buttons">
-                <button class="knapp active" data-month="2025-09">Sep 2025</button>
-                <button class="knapp" data-month="2025-10">Okt 2025</button>
-                <button class="knapp" data-month="2025-11">Nov 2025</button>
-                <button class="knapp" data-month="2025-12">Des 2025</button>
-                <button class="knapp" data-month="2026-01">Jan 2026</button>
-                <button class="knapp" data-month="2026-02">Feb 2026</button>
-              </div>
+              <h2 class="title" id="dashboard-title">KPI - Mars 2026</h2>
+              <p class="muted">Rullende 12 måneder</p>
+              <div class="months" id="month-buttons"></div>
               <div class="kpi-grid">
-                <div class="kpi kpi-a"><h3>Omsetning</h3><p id="kpi-omsetning">248 000 kr</p><small id="kpi-omsetning-endring">+3.1%</small></div>
-                <div class="kpi kpi-b"><h3>Kostnader</h3><p id="kpi-kost">161 000 kr</p><small id="kpi-kost-endring">+1.4%</small></div>
-                <div class="kpi kpi-c"><h3>Resultat</h3><p id="kpi-resultat">87 000 kr</p><small id="kpi-resultat-endring">+6.2%</small></div>
+                <div class="kpi kpi-a"><h3>Omsetning</h3><p id="kpi-omsetning">340 000 kr</p><small id="kpi-omsetning-endring">+6.7%</small></div>
+                <div class="kpi kpi-b"><h3>Kostnader</h3><p id="kpi-kost">190 000 kr</p><small id="kpi-kost-endring">+2.2%</small></div>
+                <div class="kpi kpi-c"><h3>Resultat</h3><p id="kpi-resultat">150 000 kr</p><small id="kpi-resultat-endring">+12.1%</small></div>
               </div>
               <div class="actions">
                 <button class="knapp" id="forrige-knapp">Forrige måned</button>
@@ -131,11 +124,11 @@
             </article>
 
             <article class="kort">
-              <h2 class="title">Trend siste 6 måneder</h2>
+              <h2 class="title">Resultat - rolling 12 month</h2>
               <div class="graf-wrap">
-                <svg viewBox="0 0 620 180" width="100%" aria-label="Linjegraf for resultat">
-                  <polyline fill="none" stroke="#93c5fd" stroke-width="2" points="0,130 620,130"></polyline>
-                  <polyline id="trend-line" fill="none" stroke="#0f6288" stroke-width="4" points="20,120 120,105 220,112 320,90 420,74 520,56"></polyline>
+                <svg viewBox="0 0 620 180" width="100%" aria-label="Linjegraf rolling 12 month">
+                  <polyline fill="none" stroke="#cbd5e1" stroke-width="2" points="0,130 620,130"></polyline>
+                  <polyline id="trend-line" fill="none" stroke="#0f6288" stroke-width="4" points="20,120 120,110 220,102 320,96 420,88 520,80"></polyline>
                 </svg>
                 <div class="bars" id="trend-bars"></div>
               </div>
@@ -147,14 +140,11 @@
               <h2 class="title">Ditt selskap</h2>
               <div class="rad"><span>Nordlys Drift AS</span><span class="badge info">KUNDE</span></div>
               <div class="rad"><span>Ansvarlig rådgiver</span><span>Silje Larsen</span></div>
-              <div class="actions">
-                <button class="knapp" data-klikk="Kontaktforespørsel sendt (demo)">Kontakt regnskapsfører</button>
-              </div>
             </article>
 
             <article class="kort role-only role-regnskapsforer">
               <h2 class="title">Kundekontroll</h2>
-              <select class="select" id="kunde-select">
+              <select class="select">
                 <option>Nordlys Drift AS</option>
                 <option>Fjord Handel AS</option>
                 <option>Arktisk Bygg AS</option>
@@ -180,66 +170,37 @@
         </div>
       </section>
 
-      <section class="view" id="view-bilag">
-        <div class="kort">
-          <h2 class="title">Bilagsside (demo)</h2>
-          <div class="rad"><span>Taxi-kvittering januar</span><div class="actions"><button class="knapp" data-klikk="Filvalg åpnet (demo)">Last opp</button><button class="knapp role-only role-regnskapsforer" data-klikk="Godkjent av regnskapsfører">Godkjenn</button></div></div>
-          <div class="rad"><span>Faktura leverandør ACME</span><div class="actions"><button class="knapp" data-klikk="Dokument koblet til voucher">Koble voucher</button><button class="knapp" data-klikk="Status satt til FERDIG">Sett FERDIG</button></div></div>
-        </div>
-      </section>
-
-      <section class="view" id="view-meldinger">
-        <div class="layout">
-          <article class="kort">
-            <h2 class="title">Meldingstråder</h2>
-            <div class="rad"><span>Frist MVA Q1</span><button class="knapp" data-klikk="Tråd åpnet: Frist MVA Q1">Åpne</button></div>
-            <div class="rad"><span>Dokumentasjon lønn</span><button class="knapp" data-klikk="Tråd åpnet: Dokumentasjon lønn">Åpne</button></div>
-            <div class="rad"><span>Avstemming februar</span><button class="knapp" data-klikk="Tråd åpnet: Avstemming februar">Åpne</button></div>
-          </article>
-          <article class="kort">
-            <h2 class="title">Skriv melding</h2>
-            <input class="input" id="msg-title" placeholder="Emne" value="Frist MVA Q1" />
-            <div style="height:8px"></div>
-            <textarea class="textarea" id="msg-body" placeholder="Skriv melding her...">Hei! Kan dere laste opp manglende bilag innen fredag?</textarea>
-            <div class="actions">
-              <button class="knapp" id="msg-draft">Lagre utkast</button>
-              <button class="knapp knapp-dark" id="msg-send">Send melding</button>
-            </div>
-            <p class="muted" id="msg-feedback">Ingen melding sendt ennå.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="view" id="view-mva">
-        <div class="kort">
-          <h2 class="title">MVA-side (demo)</h2>
-          <div class="rad"><span>Periode 2026-01</span><span class="badge info">PÅGÅR</span></div>
-          <div class="rad"><span>Periode 2025-12</span><span class="badge ok">INNRAPPORTERT</span></div>
-          <div class="actions">
-            <button class="knapp" data-klikk="Status satt til PÅGÅR">Sett PÅGÅR</button>
-            <button class="knapp" data-klikk="Status satt til INNRAPPORTERT">Sett INNRAPPORTERT</button>
-            <button class="knapp knapp-dark" data-klikk="MVA-rapport eksportert (demo)">Eksporter MVA-rapport</button>
-          </div>
-        </div>
-      </section>
+      <section class="view" id="view-bilag"><div class="kort"><h2 class="title">Bilagsside (demo)</h2><div class="rad"><span>Taxi-kvittering januar</span><div class="actions"><button class="knapp" data-klikk="Filvalg åpnet (demo)">Last opp</button><button class="knapp role-only role-regnskapsforer" data-klikk="Godkjent av regnskapsfører">Godkjenn</button></div></div><div class="rad"><span>Faktura leverandør ACME</span><div class="actions"><button class="knapp" data-klikk="Dokument koblet til voucher">Koble voucher</button><button class="knapp" data-klikk="Status satt til FERDIG">Sett FERDIG</button></div></div></div></section>
+      <section class="view" id="view-meldinger"><div class="layout"><article class="kort"><h2 class="title">Meldingstråder</h2><div class="rad"><span>Frist MVA Q1</span><button class="knapp" data-klikk="Tråd åpnet: Frist MVA Q1">Åpne</button></div><div class="rad"><span>Dokumentasjon lønn</span><button class="knapp" data-klikk="Tråd åpnet: Dokumentasjon lønn">Åpne</button></div><div class="rad"><span>Avstemming februar</span><button class="knapp" data-klikk="Tråd åpnet: Avstemming februar">Åpne</button></div></article><article class="kort"><h2 class="title">Skriv melding</h2><input class="input" id="msg-title" value="Frist MVA Q1" /><div style="height:8px"></div><textarea class="textarea" id="msg-body">Hei! Kan dere laste opp manglende bilag innen fredag?</textarea><div class="actions"><button class="knapp" id="msg-draft">Lagre utkast</button><button class="knapp knapp-dark" id="msg-send">Send melding</button></div><p class="muted" id="msg-feedback">Ingen melding sendt ennå.</p></article></div></section>
+      <section class="view" id="view-mva"><div class="kort"><h2 class="title">MVA-side (demo)</h2><div class="rad"><span>Periode 2026-01</span><span class="badge info">PÅGÅR</span></div><div class="rad"><span>Periode 2025-12</span><span class="badge ok">INNRAPPORTERT</span></div><div class="actions"><button class="knapp" data-klikk="Status satt til PÅGÅR">Sett PÅGÅR</button><button class="knapp" data-klikk="Status satt til INNRAPPORTERT">Sett INNRAPPORTERT</button><button class="knapp knapp-dark" data-klikk="MVA-rapport eksportert (demo)">Eksporter MVA-rapport</button></div></div></section>
     </main>
 
     <div class="toast" id="toast"></div>
 
     <script>
       const månedData = {
-        "2025-09": { label: "September 2025", omsetning: 248000, kost: 161000, resultat: 87000, o: "+3.1%", k: "+1.4%", r: "+6.2%", bars:[62,58,60,65,72,78], points:"20,122 120,112 220,116 320,104 420,93 520,84" },
-        "2025-10": { label: "Oktober 2025", omsetning: 256000, kost: 164000, resultat: 92000, o: "+3.2%", k: "+1.8%", r: "+5.8%", bars:[64,59,62,67,74,81], points:"20,119 120,109 220,114 320,101 420,90 520,80" },
-        "2025-11": { label: "November 2025", omsetning: 262000, kost: 170000, resultat: 92000, o: "+2.3%", k: "+3.7%", r: "0.0%", bars:[63,61,61,68,74,80], points:"20,120 120,110 220,110 320,98 420,90 520,81" },
-        "2025-12": { label: "Desember 2025", omsetning: 289000, kost: 181000, resultat: 108000, o: "+10.3%", k: "+6.4%", r: "+17.4%", bars:[68,64,65,73,82,88], points:"20,116 120,106 220,107 320,92 420,82 520,70" },
-        "2026-01": { label: "Januar 2026", omsetning: 301000, kost: 183000, resultat: 118000, o: "+4.1%", k: "+1.1%", r: "+9.3%", bars:[70,66,67,75,84,90], points:"20,114 120,103 220,104 320,90 420,78 520,64" },
-        "2026-02": { label: "Februar 2026", omsetning: 320000, kost: 185000, resultat: 135000, o: "+6.3%", k: "+1.1%", r: "+14.4%", bars:[72,67,63,75,84,92], points:"20,112 120,102 220,110 320,88 420,74 520,56" }
+        "2025-04": { label: "April 2025", omsetning: 212000, kost: 154000, resultat: 58000, o: "+1.4%", k: "+0.9%", r: "+2.7%" },
+        "2025-05": { label: "Mai 2025", omsetning: 224000, kost: 156000, resultat: 68000, o: "+5.7%", k: "+1.3%", r: "+17.2%" },
+        "2025-06": { label: "Juni 2025", omsetning: 236000, kost: 159000, resultat: 77000, o: "+5.4%", k: "+1.9%", r: "+13.2%" },
+        "2025-07": { label: "Juli 2025", omsetning: 231000, kost: 157000, resultat: 74000, o: "-2.1%", k: "-1.3%", r: "-3.9%" },
+        "2025-08": { label: "August 2025", omsetning: 242000, kost: 160000, resultat: 82000, o: "+4.8%", k: "+1.9%", r: "+10.8%" },
+        "2025-09": { label: "September 2025", omsetning: 248000, kost: 161000, resultat: 87000, o: "+2.5%", k: "+0.6%", r: "+6.1%" },
+        "2025-10": { label: "Oktober 2025", omsetning: 256000, kost: 164000, resultat: 92000, o: "+3.2%", k: "+1.8%", r: "+5.8%" },
+        "2025-11": { label: "November 2025", omsetning: 262000, kost: 170000, resultat: 92000, o: "+2.3%", k: "+3.7%", r: "0.0%" },
+        "2025-12": { label: "Desember 2025", omsetning: 289000, kost: 181000, resultat: 108000, o: "+10.3%", k: "+6.4%", r: "+17.4%" },
+        "2026-01": { label: "Januar 2026", omsetning: 301000, kost: 183000, resultat: 118000, o: "+4.1%", k: "+1.1%", r: "+9.3%" },
+        "2026-02": { label: "Februar 2026", omsetning: 320000, kost: 185000, resultat: 135000, o: "+6.3%", k: "+1.1%", r: "+14.4%" },
+        "2026-03": { label: "Mars 2026", omsetning: 340000, kost: 190000, resultat: 150000, o: "+6.2%", k: "+2.7%", r: "+11.1%" }
       };
 
       const månedNøkler = Object.keys(månedData);
-      let aktivMåned = "2025-09";
+      let aktivIndex = månedNøkler.length - 1;
 
       const toast = document.getElementById("toast");
+      const monthButtons = document.getElementById("month-buttons");
+      const trendBars = document.getElementById("trend-bars");
+      const trendLine = document.getElementById("trend-line");
+
       const title = document.getElementById("dashboard-title");
       const om = document.getElementById("kpi-omsetning");
       const ko = document.getElementById("kpi-kost");
@@ -247,14 +208,51 @@
       const oe = document.getElementById("kpi-omsetning-endring");
       const ke = document.getElementById("kpi-kost-endring");
       const rr = document.getElementById("kpi-resultat-endring");
-      const trendBars = document.getElementById("trend-bars");
-      const trendLine = document.getElementById("trend-line");
 
       function kr(n) { return `${n.toLocaleString("nb-NO")} kr`; }
       function visToast(txt) { toast.textContent = txt; toast.classList.add("vis"); setTimeout(() => toast.classList.remove("vis"), 1700); }
 
-      function renderMåned(key) {
-        aktivMåned = key;
+      function renderMonthButtons() {
+        monthButtons.innerHTML = månedNøkler.map((k, i) => {
+          const d = månedData[k].label.split(" ")[0].slice(0, 3);
+          const y = k.slice(2, 4);
+          return `<button class="knapp ${i === aktivIndex ? "active" : ""}" data-month-index="${i}">${d} ${y}</button>`;
+        }).join("");
+
+        monthButtons.querySelectorAll("[data-month-index]").forEach((b) => {
+          b.addEventListener("click", () => {
+            aktivIndex = Number(b.getAttribute("data-month-index"));
+            renderAktivMåned();
+          });
+        });
+      }
+
+      function renderTrend() {
+        const start = Math.max(0, aktivIndex - 11);
+        const subset = månedNøkler.slice(start, aktivIndex + 1);
+        const resultater = subset.map((k) => månedData[k].resultat);
+        const max = Math.max(...resultater);
+        const min = Math.min(...resultater);
+        const range = Math.max(1, max - min);
+
+        trendBars.innerHTML = subset.map((k) => {
+          const ratio = (månedData[k].resultat - min) / range;
+          const h = Math.max(25, Math.round(30 + ratio * 70));
+          return `<div class="bar" style="height:${h}%"><span>${k.slice(5)}</span></div>`;
+        }).join("");
+
+        const points = subset.map((k, idx) => {
+          const x = 20 + idx * (500 / Math.max(1, subset.length - 1));
+          const ratio = (månedData[k].resultat - min) / range;
+          const y = 130 - ratio * 80;
+          return `${x.toFixed(1)},${y.toFixed(1)}`;
+        }).join(" ");
+
+        trendLine.setAttribute("points", points);
+      }
+
+      function renderAktivMåned() {
+        const key = månedNøkler[aktivIndex];
         const d = månedData[key];
         title.textContent = `KPI - ${d.label}`;
         om.textContent = kr(d.omsetning);
@@ -263,16 +261,28 @@
         oe.textContent = d.o;
         ke.textContent = d.k;
         rr.textContent = d.r;
-        trendLine.setAttribute("points", d.points);
-        trendBars.innerHTML = d.bars.map((h, i) => `<div class="bar" style="height:${h}%"><span>${månedNøkler[i].slice(5)}</span></div>`).join("");
-        document.querySelectorAll("#month-buttons [data-month]").forEach((b) => b.classList.toggle("active", b.getAttribute("data-month") === key));
+        renderMonthButtons();
+        renderTrend();
         visToast(`Viser ${d.label}`);
       }
 
-      document.querySelectorAll("#month-buttons [data-month]").forEach((b) => b.addEventListener("click", () => renderMåned(b.getAttribute("data-month"))));
-      document.getElementById("forrige-knapp").addEventListener("click", () => { const i = Math.max(0, månedNøkler.indexOf(aktivMåned) - 1); renderMåned(månedNøkler[i]); });
-      document.getElementById("neste-knapp").addEventListener("click", () => { const i = Math.min(månedNøkler.length - 1, månedNøkler.indexOf(aktivMåned) + 1); renderMåned(månedNøkler[i]); });
-      document.getElementById("simuler-knapp").addEventListener("click", () => { om.textContent = kr(Number(om.textContent.replace(/\D/g, "")) + 7000); re.textContent = kr(Number(re.textContent.replace(/\D/g, "")) + 7000); visToast("Simulerte tall oppdatert"); });
+      document.getElementById("forrige-knapp").addEventListener("click", () => {
+        aktivIndex = Math.max(0, aktivIndex - 1);
+        renderAktivMåned();
+      });
+
+      document.getElementById("neste-knapp").addEventListener("click", () => {
+        aktivIndex = Math.min(månedNøkler.length - 1, aktivIndex + 1);
+        renderAktivMåned();
+      });
+
+      document.getElementById("simuler-knapp").addEventListener("click", () => {
+        const key = månedNøkler[aktivIndex];
+        månedData[key].omsetning += 5000;
+        månedData[key].resultat += 5000;
+        renderAktivMåned();
+        visToast("Simulerte tall oppdatert");
+      });
 
       document.querySelectorAll("[data-klikk]").forEach((k) => k.addEventListener("click", () => visToast(k.getAttribute("data-klikk"))));
 
@@ -305,7 +315,7 @@
         });
       });
 
-      renderMåned(aktivMåned);
+      renderAktivMåned();
     </script>
   </body>
 </html>
